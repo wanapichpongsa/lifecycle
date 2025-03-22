@@ -1,6 +1,7 @@
 "use client";
 
 import { Refurbisher } from '@/types';
+import { Toaster, toast } from 'react-hot-toast';
 
 interface RefurbisherListProps {
   refurbishers: Refurbisher[];
@@ -10,6 +11,7 @@ interface RefurbisherListProps {
 
 export default function RefurbisherList({ refurbishers, productName, manufacturer }: RefurbisherListProps) {
   const getQuote = async (refurbisher: string) => {
+    toast.success(`Quote sent to: ${refurbisher}`);
     const encodedRefurbisher = encodeURIComponent(refurbisher);
     const encodedProduct = encodeURIComponent(productName);
     const response = await fetch(`/api/quote?refurbisher=${encodedRefurbisher}&product=${encodedProduct}`);
@@ -19,6 +21,7 @@ export default function RefurbisherList({ refurbishers, productName, manufacture
 
   return (
     <div className="w-full max-w-5xl flex flex-col gap-4">
+      <Toaster />
       {refurbishers
         .filter(refurbisher => 
           refurbisher.deals.some(deal => 
@@ -35,7 +38,7 @@ export default function RefurbisherList({ refurbishers, productName, manufacture
                 .filter(deal => deal.product.includes(productName))
                 .map(deal => (
                   <div key={deal.product} className="ml-4 text-xs sm:text-sm">
-                    - {deal.product}: £{deal.price}
+                    - {deal.product}: from £{deal.price}
                   </div>
                 ))
               }
