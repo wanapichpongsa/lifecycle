@@ -27,20 +27,23 @@ export default function RefurbisherList({ refurbishers, productName, manufacture
           )
         )
         .map(refurbisher => (
-          <div key={refurbisher.name} className="flex justify-between w-full p-4 bg-white rounded-lg shadow hover:bg-zinc-50 transition-colors">
-            <div className="flex flex-col gap-2">
-              <h2 className="font-bold">{refurbisher.name}</h2>
-              <p>Matching deals:</p>
+          <div key={refurbisher.name} className="flex flex-col sm:flex-row justify-between w-full p-3 sm:p-4 bg-white rounded-lg shadow hover:bg-zinc-50 transition-colors">
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <h2 className="font-bold text-sm sm:text-base">{refurbisher.name}</h2>
+              <p className="text-xs sm:text-sm">Matching deals:</p>
               {refurbisher.deals
                 .filter(deal => deal.product.includes(productName))
                 .map(deal => (
-                  <div key={deal.product} className="ml-4">
+                  <div key={deal.product} className="ml-4 text-xs sm:text-sm">
                     - {deal.product}: £{deal.price}
                   </div>
                 ))
               }
             </div>
-            <button onClick={() => getQuote(refurbisher.name)} className="bg-blue-600 hover:bg-blue-700 text-zinc-100 px-4 py-1.5 my-auto rounded-lg">
+            <button 
+              onClick={() => getQuote(refurbisher.name)} 
+              className="mt-2 sm:mt-0 bg-blue-600 hover:bg-blue-700 text-zinc-100 px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm"
+            >
               Get Quote
             </button>
           </div>
