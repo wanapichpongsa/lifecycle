@@ -7,12 +7,12 @@ import { useRouter } from 'next/navigation';
 
 // this app can be applied to business manufacturing operations (recycling raw materials)
 export default function Table() {
-  const headings: string[] = ["Serial Number", "Name", "Price (£)", "Supplier", "Manufacture Date", "Expected Lifespan"];
+  const headings: string[] = ["Serial Number", "Name", "Supplier", "Manufacture Date", "Expected Lifespan"];
   const rows: string[][] = [
-    ["00000001", "iPhone 11", "1,299.00", "Apple", "2020-01-01", "1 month left"],
-    ["00000002", "Macbook M2", "1,999.00", "Apple", "2024-01-01", "4 years 10 months left"],
-    ["00000003", "NVIDIA Blackwell GPU", "1,599.99", "NVIDIA", "2025-01-01", "4 years left"],
-    ["00000004", "Projector", "59.99", "ClockoWe", "2022-01-01", "1 month left"]
+    ["00000001", "iPhone 11", "Apple", "2020-01-01", "1 month left"],
+    ["00000002", "Macbook M2", "Apple", "2024-01-01", "4 years 10 months left"],
+    ["00000003", "NVIDIA Blackwell GPU", "NVIDIA", "2025-01-01", "4 years left"],
+    ["00000004", "Projector", "ClockoWe", "2022-01-01", "1 month left"]
   ];
 
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function Table() {
               <th 
                 key={heading} 
                 className={`text-left px-2 sm:px-4 py-2 text-xs sm:text-base whitespace-nowrap ${
-                  index !== 1 && index !== 5 ? 'hidden sm:table-cell' : ''
+                  index !== 1 && index !== 4 ? 'hidden sm:table-cell' : ''
                 }`}
               >
                 {heading}
@@ -46,7 +46,7 @@ export default function Table() {
                 <td 
                   key={cell} 
                   className={`text-left px-2 sm:px-4 py-2 text-xs sm:text-base whitespace-nowrap ${
-                    index !== 1 && index !== 5 ? 'hidden sm:table-cell' : ''
+                    index !== 1 && index !== 4 ? 'hidden sm:table-cell' : ''
                   }`}
                 >
                   {cell}

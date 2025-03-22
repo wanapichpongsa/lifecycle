@@ -5,10 +5,10 @@ import Link from "next/link";
 
 // ideally would be database
 const rows: string[][] = [
-  ["00000001", "iPhone 11", "1,299.00", "Apple", "2020-01-01", "1 month left", "iphone.jpg"],
-  ["00000002", "Macbook M2", "1,999.00", "Apple", "2024-01-01", "4 years 10 months left", "m2.jpg"],
-  ["00000003", "NVIDIA Blackwell GPU", "1,599.99", "NVIDIA", "2025-01-01", "4 years left"],
-  ["00000004", "Projector", "59.99", "ClockoWe", "2022-01-01", "1 month left", "projector.jpg"]
+  ["00000001", "iPhone 11", "Apple", "2020-01-01", "1 month left", "iphone.jpg"],
+  ["00000002", "Macbook M2", "Apple", "2024-01-01", "4 years 10 months left", "m2.jpg"],
+  ["00000003", "NVIDIA Blackwell GPU", "NVIDIA", "2025-01-01", "4 years left"],
+  ["00000004", "Projector", "ClockoWe", "2022-01-01", "1 month left", "projector.jpg"]
 ];
 
 export default async function RefurbishPage({ params }: { params: Promise<{ id: string }> }) {
@@ -16,7 +16,7 @@ export default async function RefurbishPage({ params }: { params: Promise<{ id: 
   const row = getProduct(id);
 
   const refurbisherPrice = refurbishers.find(
-    (refurbisher) => refurbisher.name === row?.[3]
+    (refurbisher) => refurbisher.name === row?.[2]
   )?.deals.find(
     (deal) => deal.product === row?.[1]
   )?.price || "None";
@@ -32,7 +32,7 @@ export default async function RefurbishPage({ params }: { params: Promise<{ id: 
           {/* Product Image */}
           <div className="relative h-[300px] sm:h-[400px]">
             <Image 
-              src={`/${row?.[6]}`} 
+              src={`/${row?.[5] || ''}`} 
               alt={row?.[1] || "Product"} 
               fill
               className="object-contain p-4"
@@ -46,20 +46,16 @@ export default async function RefurbishPage({ params }: { params: Promise<{ id: 
               <h1 className="text-xl sm:text-3xl font-bold text-zinc-900">{row?.[1]}</h1>
               <div className="space-y-2 text-sm sm:text-base text-zinc-700">
                 <p className="flex justify-between">
-                  <span className="font-semibold">Price:</span>
-                  <span>£{row?.[2]}</span>
-                </p>
-                <p className="flex justify-between">
                   <span className="font-semibold">Supplier:</span>
-                  <span>{row?.[3]}</span>
+                  <span>{row?.[2]}</span>
                 </p>
                 <p className="flex justify-between">
                   <span className="font-semibold">Manufacture Date:</span>
-                  <span>{row?.[4]}</span>
+                  <span>{row?.[3]}</span>
                 </p>
                 <p className="flex justify-between">
                   <span className="font-semibold">Expected Lifespan:</span>
-                  <span>{row?.[5]}</span>
+                  <span>{row?.[4]}</span>
                 </p>
               </div>
             </div>
@@ -67,10 +63,10 @@ export default async function RefurbishPage({ params }: { params: Promise<{ id: 
             {/* Action Buttons */}
             <div className="space-y-2 sm:space-y-3">
               <button className="w-full py-2 sm:py-3 px-4 bg-blue-600 text-zinc-100 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base">
-                Direct Refurbisher: £{refurbisherPrice}
+                Original Refurbisher: £{refurbisherPrice}
               </button>
               <Link 
-                href={`/refurbishers/${encodeURIComponent(`${row?.[3]} ${row?.[1].replaceAll(' ', '-')} ${row?.[5]}`)}`}
+                href={`/refurbishers/${encodeURIComponent(`${row?.[2]} ${row?.[1].replaceAll(' ', '-')} ${row?.[4]}`)}`}
                 className="text-center block w-full py-2 sm:py-3 px-4 bg-green-600 text-zinc-100 rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
               >
                 Find Refurbisher
