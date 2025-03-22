@@ -1,4 +1,4 @@
-import { refurbishers } from '@/types/data';
+import { refurbishers } from '@/types/refurbishers';
 import SearchBar from '@/components/SearchBar';
 import RefurbisherList from '@/components/RefurbisherList';
 

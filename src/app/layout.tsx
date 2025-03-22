@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LyfeCycle",
+  title: "Recircle",
   description: "Get paid for things you don't use anymore",
 };
 

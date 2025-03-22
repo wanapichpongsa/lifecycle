@@ -1,15 +1,8 @@
 import Image from "next/image";
-import { refurbishers } from "@/types/data";
+import { refurbishers } from "@/types/refurbishers";
+import { getProduct } from "@/types/products";
 import { ArrowLeft } from 'lucide-react';
 import Link from "next/link";
-
-// ideally would be database
-const rows: string[][] = [
-  ["00000001", "iPhone 11", "Apple", "2020-01-01", "1 month left", "iphone.jpg"],
-  ["00000002", "Macbook M2", "Apple", "2024-01-01", "4 years 10 months left", "m2.jpg"],
-  ["00000003", "NVIDIA Blackwell GPU", "NVIDIA", "2025-01-01", "4 years left"],
-  ["00000004", "Projector", "ClockoWe", "2022-01-01", "1 month left", "projector.jpg"]
-];
 
 export default async function RefurbishPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -83,8 +76,4 @@ export default async function RefurbishPage({ params }: { params: Promise<{ id: 
       </div>
     </main>
   );
-}
-
-function getProduct(id: string): string[] | undefined {
-  return rows.find((row) => row[0] === id);
 }
